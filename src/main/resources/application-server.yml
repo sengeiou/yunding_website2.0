@@ -1,0 +1,108 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /api
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  #  解决乱码
+  messages:
+    encoding: UTF-8
+  banner:
+    charset: UTF-8
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    platform: mysql
+    # 初始化建立连接数
+    initialSize: 5
+    # 最大连接数量
+    maxActive: 100
+    # 最小连接池数量
+    minIdle: 5
+    # 获取连接等待超时时间
+    maxWait: 60000
+    # 是否缓存preparedStatement
+    poolPreparedStatements: true
+    # 与poolPreparedStatements配套使用，最大缓存数量
+    maxOpenPreparedStatements: 50
+    # 检测连接是否有效的sql
+    validationQuery: SELECT 1 FROM DUAL
+    # 申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
+    testWhileIdle: true
+    # 间隔多久才进行一次检测，检测需要关闭的空闲连接
+    timeBetweenEvictionRunsMillis: 60000
+    # 连接保持空闲而不被驱逐的最小时间
+    minEvictableIdleTimeMillis: 30000
+    # 监控统计用的filter:stat
+    # 防御sql注入的filter:wall
+    # 日志用的filter:
+    filters: stat, wall
+    # Druid监控相关配置
+    stat:
+      # 白名单
+      allow:
+      #      127.0.0.1
+
+      # 黑名单
+      deny:
+      username: admin
+      password: Yunding100%
+    #    url: jdbc:mysql://localhost:3306/db_yunding_website2?useUnicode=true&useSSL=false&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/db_yunding_website2?useUnicode=true&useSSL=false&characterEncoding=utf8
+    username: yunding
+    password: yundingMysql100!
+
+  #    password: yundingMysql100%
+  redis:
+    #    host: liyafei.xyz
+    password: leeyfRedis100%
+    host: localhost
+    #    password: redis100%
+    port: 6379
+    timeout: 10000
+    jedis:
+      pool:
+        max-idle: 100
+        max-active: 80
+        max-wait: 10000
+    database: 2
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+
+mybatis-plus:
+  global-config:
+    db-config:
+      table-underline: true
+  type-aliases-package: com.yundingshuyuan.website.pojo
+  mapper-locations: classpath:/mapper/*Mapper.xml
+logging:
+  level:
+    com.yunding.os.dao: DEBUG
+elasticsearch:
+  #  ip: 106.15.198.212
+  ip: 39.104.201.80 #郝英凯服务器
+  port: 9300
+  cluster:
+    name: yunding-os
+  pool: 5
+fdfs:
+  so-timeout: 15000
+  connect-timeout: 6000
+  tracker-list: 39.104.201.80:22122
+---
+#OSS
+java4all:
+  file:
+    endpoint: oss-cn-beijing.aliyuncs.com #oss服务器地址
+    keyid: LTAIJYtunVTqmXna
+    keysecret: 0B4YGlTaVA23GdX1I2uLWiPJMZziar
+    bucketname: yundingweb
+    filehost: yunding
